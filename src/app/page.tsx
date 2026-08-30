@@ -439,17 +439,24 @@ export default function PortfolioPage() {
             fast.
           </p>
 
-          {/* Email + phone — explicit text, never icons-only */}
+          {/* Email + phone — ICONS ONLY (no visible text), per design brief.
+               The href still routes through mailto: / tel: on click, and an
+               aria-label keeps the link accessible to screen readers and
+               crawlable by search engines + LLMs (the actual email and
+               phone are also exposed in the JSON-LD Person schema in
+               layout.tsx and in /llms.txt, so AI agents can still surface
+               them in answer snippets). */}
           <div className="contact-methods">
             <a
-              className="contact-pill contact-pill-email"
+              className="contact-pill contact-pill-icon-only"
               href="mailto:davidonoja1999@gmail.com"
               aria-label="Email davidonoja1999@gmail.com"
+              title="Email"
             >
               <span className="contact-pill-icon" aria-hidden>
                 <svg
-                  width="20"
-                  height="20"
+                  width="24"
+                  height="24"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -461,22 +468,17 @@ export default function PortfolioPage() {
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                 </svg>
               </span>
-              <span className="contact-pill-text">
-                <span className="contact-pill-label">Email</span>
-                <span className="contact-pill-value">
-                  davidonoja1999@gmail.com
-                </span>
-              </span>
             </a>
             <a
-              className="contact-pill contact-pill-phone"
+              className="contact-pill contact-pill-icon-only"
               href="tel:+2349072626267"
               aria-label="Call +234 907 262 6267"
+              title="Phone / WhatsApp"
             >
               <span className="contact-pill-icon" aria-hidden>
                 <svg
-                  width="20"
-                  height="20"
+                  width="24"
+                  height="24"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -486,10 +488,6 @@ export default function PortfolioPage() {
                 >
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z" />
                 </svg>
-              </span>
-              <span className="contact-pill-text">
-                <span className="contact-pill-label">Phone / WhatsApp</span>
-                <span className="contact-pill-value">0907 262 6267</span>
               </span>
             </a>
           </div>
