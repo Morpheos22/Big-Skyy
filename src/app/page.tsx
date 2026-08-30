@@ -2,7 +2,7 @@ import { InstagramEmbed } from "@/components/instagram-embed";
 
 /**
  * Onoja Oche David — Big Skyy Marketing portfolio.
- * Server component. The Instagram embed and the SecurityGate (in layout)
+ * Server component. The Instagram embeds and the SecurityGate (in layout)
  * are the only client islands.
  *
  * Design notes:
@@ -13,6 +13,16 @@ import { InstagramEmbed } from "@/components/instagram-embed";
  * - Root wrapper uses `min-h-screen flex flex-col` + `mt-auto` on the
  *   footer so the footer sticks to the viewport bottom on short pages
  *   and is pushed down naturally on long pages (no floating/overlap).
+ * - The showcase section now features THREE prominent embeds:
+ *     1. The Instagram reel (the video — primary hook)
+ *     2. The Instagram profile embed (a card with recent posts)
+ *     3. A LinkedIn rich-preview card
+ *   This matches the user's brief: "I gave you three embedding links, I want
+ *   all three prominent display in the showcase section, the videos are the
+ *   hook."
+ * - The contact section now displays the email address and phone number as
+ *   visible, readable text next to the icons (larger font, nowrap, high
+ *   contrast) — not icons-only.
  */
 
 type Skill = { title: string; description: string };
@@ -99,15 +109,15 @@ const strengths: Strength[] = [
   },
   {
     num: "4",
-    title: "Fast learner",
+    title: "AI-fluent",
     description:
-      "Actively building practical capability across content production, paid media, and modern marketing tools.",
+      "I use generative AI daily for scripts, concepts, and creative assets — so I ship faster than teams still treating AI as an experiment.",
   },
   {
     num: "5",
     title: "Clear communication",
     description:
-      "Confident writing professional sales copy and communicating with prospects across WhatsApp, email, and LinkedIn.",
+      "Confident writing professional sales copy and running prospect conversations across WhatsApp, email, and LinkedIn.",
   },
 ];
 
@@ -125,7 +135,7 @@ export default function PortfolioPage() {
         <div className="shader-bg" aria-hidden />
         <div className="grain" aria-hidden />
         <div className="wrap relative z-[2]">
-          <span className="eyebrow">Real Estate Digital Marketing</span>
+          <span className="eyebrow">Abuja Real Estate Digital Marketing</span>
           <h1 className="h1-gradient">Onoja Oche David</h1>
           <p
             className="font-display"
@@ -136,7 +146,7 @@ export default function PortfolioPage() {
               marginBottom: "12px",
             }}
           >
-            Digital Marketing &amp; Content Specialist
+            Digital Marketing &amp; Real Estate Content Specialist
           </p>
           <p
             style={{
@@ -146,7 +156,8 @@ export default function PortfolioPage() {
             }}
           >
             Abuja, Nigeria &nbsp;•&nbsp; Content Creation &nbsp;•&nbsp; Paid
-            Ads &nbsp;•&nbsp; Lead Generation
+            Ads &nbsp;•&nbsp; AI-Assisted Production &nbsp;•&nbsp; Lead
+            Generation
           </p>
           <p
             className="hero-summary"
@@ -159,7 +170,8 @@ export default function PortfolioPage() {
             I build the content and campaigns that turn property listings into
             qualified conversations. From property walkthrough videos to Meta
             and Google Ads, I help real estate brands in Abuja reach investors
-            and buyers, and move them toward a WhatsApp enquiry.
+            and buyers, and move them toward a WhatsApp enquiry — shipping
+            faster with AI-assisted production.
           </p>
           <div
             className="cta-row"
@@ -204,7 +216,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* ============== SHOWCASE ============== */}
+      {/* ============== SHOWCASE — three prominent embeds ============== */}
       <section
         id="showcase"
         className="relative"
@@ -214,51 +226,144 @@ export default function PortfolioPage() {
           <p className="eyebrow-small">Showcase</p>
           <h2 className="h2">See the work in action</h2>
           <p className="section-sub">
-            Real estate and digital marketing content, live on Instagram and
-            LinkedIn.
+            Real estate and digital marketing content — a featured Instagram
+            reel, the full Instagram profile, and the LinkedIn profile. The
+            videos are the hook.
           </p>
 
-          <div className="showcase-grid">
+          {/* --- Featured reel (the hook) --- */}
+          <div
+            className="showcase-featured"
+            data-protect
+            aria-label="Featured Instagram reel"
+          >
+            <div className="showcase-featured-label">Featured reel</div>
+            <InstagramEmbed permalink="https://www.instagram.com/reel/Dbx9FmQCs8j/">
+              <div
+                style={{
+                  padding: "32px 16px",
+                  color: "rgba(255,255,255,0.6)",
+                  textAlign: "center",
+                }}
+              >
+                Loading featured Instagram reel…
+              </div>
+            </InstagramEmbed>
+          </div>
+
+          {/* --- IG profile embed + LinkedIn rich card --- */}
+          <div className="showcase-secondary-grid">
+            {/* Instagram profile embed */}
             <div
-              className="showcase-embed"
+              className="showcase-secondary-card showcase-embed-light"
               data-protect
-              aria-label="Instagram reel preview"
+              aria-label="Instagram profile embed"
             >
-              <InstagramEmbed permalink="https://www.instagram.com/reel/Dbx9FmQCs8j/">
-                <div style={{ padding: "32px 16px", color: "rgba(255,255,255,0.6)" }}>
-                  Loading Instagram reel…
+              <div className="showcase-card-label">
+                <span
+                  className="showcase-card-badge ig"
+                  aria-hidden
+                >
+                  IG
+                </span>
+                Instagram profile
+              </div>
+              <InstagramEmbed permalink="https://www.instagram.com/davidoche76/">
+                <div
+                  style={{
+                    padding: "32px 16px",
+                    color: "var(--ink-soft)",
+                    textAlign: "center",
+                  }}
+                >
+                  Loading @davidoche76 profile…
                 </div>
               </InstagramEmbed>
-            </div>
-
-            <div className="link-card-col">
               <a
-                className="link-card"
+                className="showcase-card-cta"
                 href="https://www.instagram.com/davidoche76"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span className="link-icon ig" aria-hidden>
-                  IG
-                </span>
-                <span className="link-text">
-                  <h3>@davidoche76</h3>
-                  <p>Instagram — full content library</p>
-                </span>
+                Open @davidoche76 on Instagram
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden
+                >
+                  <path d="M7 17 17 7" />
+                  <path d="M7 7h10v10" />
+                </svg>
               </a>
+            </div>
+
+            {/* LinkedIn rich card */}
+            <div
+              className="showcase-secondary-card linkedin-card"
+              aria-label="LinkedIn profile"
+            >
+              <div className="showcase-card-label">
+                <span
+                  className="showcase-card-badge li"
+                  aria-hidden
+                >
+                  in
+                </span>
+                LinkedIn profile
+              </div>
+
+              <div className="linkedin-card-body">
+                <div
+                  className="linkedin-avatar"
+                  aria-hidden
+                >
+                  OD
+                </div>
+                <div className="linkedin-meta">
+                  <h3>David Onoja</h3>
+                  <p className="linkedin-headline">
+                    Digital Marketing &amp; Real Estate Content Specialist
+                  </p>
+                  <p className="linkedin-location">
+                    Abuja, Nigeria · Big Skyy Marketing
+                  </p>
+                </div>
+              </div>
+
+              <p className="linkedin-summary">
+                Content &amp; campaigns for Abuja real estate — property
+                walkthrough videos, Meta &amp; Google Ads, lead generation, and
+                AI-assisted production. Open to network with developers,
+                investors, and marketing teams.
+              </p>
+
               <a
-                className="link-card"
+                className="showcase-card-cta"
                 href="https://www.linkedin.com/in/david-onoja-5338a13b1"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span className="link-icon li" aria-hidden>
-                  in
-                </span>
-                <span className="link-text">
-                  <h3>David Onoja</h3>
-                  <p>LinkedIn profile and network</p>
-                </span>
+                View profile on LinkedIn
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden
+                >
+                  <path d="M7 17 17 7" />
+                  <path d="M7 7h10v10" />
+                </svg>
               </a>
             </div>
           </div>
@@ -330,50 +435,67 @@ export default function PortfolioPage() {
           <h2 className="h2">Let&apos;s work together</h2>
           <p className="section-sub">
             Based in Abuja and available for on-site work, content shoots,
-            property walkthroughs, and campaign execution.
+            property walkthroughs, and campaign execution. Reach out — I reply
+            fast.
           </p>
+
+          {/* Email + phone — explicit text, never icons-only */}
           <div className="contact-methods">
-            <a className="contact-pill" href="mailto:davidonoja1999@gmail.com">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden
-              >
-                <rect x="2" y="4" width="20" height="16" rx="2" />
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-              </svg>
-              davidonoja1999@gmail.com
+            <a
+              className="contact-pill contact-pill-email"
+              href="mailto:davidonoja1999@gmail.com"
+              aria-label="Email davidonoja1999@gmail.com"
+            >
+              <span className="contact-pill-icon" aria-hidden>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                </svg>
+              </span>
+              <span className="contact-pill-text">
+                <span className="contact-pill-label">Email</span>
+                <span className="contact-pill-value">
+                  davidonoja1999@gmail.com
+                </span>
+              </span>
             </a>
-            <a className="contact-pill" href="tel:+2349072626267">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden
-              >
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z" />
-              </svg>
-              09072626267
+            <a
+              className="contact-pill contact-pill-phone"
+              href="tel:+2349072626267"
+              aria-label="Call +234 907 262 6267"
+            >
+              <span className="contact-pill-icon" aria-hidden>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z" />
+                </svg>
+              </span>
+              <span className="contact-pill-text">
+                <span className="contact-pill-label">Phone / WhatsApp</span>
+                <span className="contact-pill-value">0907 262 6267</span>
+              </span>
             </a>
           </div>
 
           {/* Big Skyy Marketing brand row */}
           <div className="footer-brand-row">
-            {/* Footer brand logo. Using a plain <img> instead of next/image
-                because we don't want a downloadable srcset / multiple
-                resolutions floating around. The middleware also blocks
-                direct access to this asset from non-same-origin referrers. */}
             <img
               src="/big-skyy-logo-transparent.png"
               alt="Big Skyy Marketing logo"

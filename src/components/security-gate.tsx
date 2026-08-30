@@ -14,10 +14,18 @@ import { useEffect } from "react";
  *  3. Disables drag-start on every <img> in the document (also enforces the
  *     `draggable=false` attribute reactively, in case images are injected by
  *     third-party scripts like the Instagram embed).
- *  4. Detects devtools being opened via window-size delta and blurs the page
- *     (visual deterrent only — not a hard block, which is impossible on the
- *     web; we keep the page usable so legit visitors aren't punished).
- *  5. Disables text selection on protected media (images, footer logo, embed).
+ *  4. Disables text selection on protected media (images, footer logo, embed).
+ *
+ * DEVTOOLS NOTE (revised):
+ *   We previously applied `filter: blur(6px)` to the whole document when
+ *   devtools was detected as open via window-size delta. That heuristic
+ *   false-positives when the user has a bookmark bar, sidebar, or any
+ *   browser chrome that reduces `innerHeight`. The blur was also causing
+ *   real users to see "only icons, no text" on the contact section — the
+ *   blur rendered the small text unreadable while larger icons remained
+ *   recognisable. We've removed the blur entirely; the keyboard + context
+ *   menu + drag blocks above remain in place, which is enough deterrence
+ *   for casual asset theft without punishing legitimate visitors.
  *
  * NOTE: nothing on the open web can be 100% protected — a determined user can
  * always open devtools. The goal here is to raise the bar high enough that
@@ -26,8 +34,6 @@ import { useEffect } from "react";
  */
 export function SecurityGate() {
   useEffect(() => {
-    const isTouch = window.matchMedia("(pointer: coarse)").matches;
-
     const onContextMenu = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
       if (!target) return;
@@ -63,7 +69,6 @@ export function SecurityGate() {
       imgs.forEach((img) => {
         img.setAttribute("draggable", "false");
         img.setAttribute("oncontextmenu", "return false");
-        img.setAttribute("loading", "eager");
       });
     };
 
@@ -122,25 +127,6 @@ export function SecurityGate() {
       }
     };
 
-    // Devtools detection — only on non-touch devices (mobile false positives).
-    // We measure the threshold between window.outer/inner dimensions; if the
-    // gap exceeds 200px in either axis, devtools is almost certainly docked.
-    let devtoolsOpen = false;
-    const threshold = 200;
-    const checkDevtools = () => {
-      if (isTouch) return;
-      const wDiff = window.outerWidth - window.innerWidth;
-      const hDiff = window.outerHeight - window.innerHeight;
-      const open = wDiff > threshold || hDiff > threshold;
-      if (open && !devtoolsOpen) {
-        devtoolsOpen = true;
-        document.documentElement.style.filter = "blur(6px)";
-      } else if (!open && devtoolsOpen) {
-        devtoolsOpen = false;
-        document.documentElement.style.filter = "";
-      }
-    };
-
     // Run once on mount + on every DOM mutation (catches Instagram iframe
     // injecting images late).
     const observer = new MutationObserver(() => {
@@ -153,10 +139,7 @@ export function SecurityGate() {
     document.addEventListener("keydown", onKeyDown, true);
     document.addEventListener("copy", onCopy, true);
 
-    const devtoolsInterval = window.setInterval(checkDevtools, 1000);
-
     tagImagesNonDraggable();
-    checkDevtools();
 
     return () => {
       observer.disconnect();
@@ -164,7 +147,7 @@ export function SecurityGate() {
       document.removeEventListener("dragstart", onDragStart, true);
       document.removeEventListener("keydown", onKeyDown, true);
       document.removeEventListener("copy", onCopy, true);
-      window.clearInterval(devtoolsInterval);
+      // Defensive: clear any stray filter just in case an older build set it.
       document.documentElement.style.filter = "";
     };
   }, []);

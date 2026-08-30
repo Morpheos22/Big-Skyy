@@ -1,7 +1,24 @@
+# robots.txt — Big Skyy Marketing / Onoja Oche David portfolio
+# Goal: allow every legitimate crawler (Google, Bing, AI agents, LLM fetchers,
+# social preview bots) to read the full site. We explicitly list the major
+# AI/LLM crawler user-agents so they know they are welcome.
+
 User-agent: Googlebot
 Allow: /
 
+User-agent: Googlebot-Image
+Allow: /
+
 User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Baiduspider
 Allow: /
 
 User-agent: Twitterbot
@@ -10,5 +27,103 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+User-agent: Slackbot-LinkExpanding
+Allow: /
+
+User-agent: Discordbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Pinterestbot
+Allow: /
+
+# ---- AI / LLM crawlers (explicit allow) ----
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: ImagesiftBot
+Allow: /
+
+User-agent: OmgiliBot
+Allow: /
+
+User-agent: Omgili
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+# ---- Default: allow everyone ----
 User-agent: *
 Allow: /
+
+# Block direct access to nothing — this is a single-page public portfolio.
+# All assets are intentionally public for indexing EXCEPT the brand logos,
+# which are hotlink-protected at the middleware layer (returning 403 to
+# non-same-origin referrers). That protection is enforced server-side, not
+# via robots.txt, so legitimate crawlers can still discover and index them.
+
+# Sitemap + LLM manifest
+Sitemap: https://onojadavid.vercel.app/sitemap.xml
