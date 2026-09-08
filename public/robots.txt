@@ -126,4 +126,4 @@ Allow: /
 # via robots.txt, so legitimate crawlers can still discover and index them.
 
 # Sitemap + LLM manifest
-Sitemap: https://onojadavid.vercel.app/sitemap.xml
+Sitemap: https://onojadavid.me/sitemap.xml

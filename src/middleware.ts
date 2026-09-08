@@ -69,10 +69,12 @@ function isAllowedReferer(req: NextRequest, pathname: string): boolean {
     return true;
   }
   // Allow the canonical production origin regardless of where the request
-  // lands (dev, preview, prod). The primary domain is onojadavid.vercel.app;
-  // big-skyy.vercel.app is kept as a legacy alias so existing links keep
-  // resolving during the transition.
+  // lands (dev, preview, prod). The primary domain is onojadavid.me;
+  // onojadavid.vercel.app and big-skyy.vercel.app are kept as legacy aliases
+  // so existing links keep resolving during the transition.
   const canonical = [
+    "https://onojadavid.me",
+    "https://www.onojadavid.me",
     "https://onojadavid.vercel.app",
     "https://big-skyy.vercel.app",
     "https://big-skyy-morpheos-projects-73412392.vercel.app",

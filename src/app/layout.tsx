@@ -18,7 +18,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const siteUrl = "https://onojadavid.vercel.app";
+const siteUrl = "https://onojadavid.me";
 
 /**
  * JSON-LD Person schema — embedded as a script tag in <head>.

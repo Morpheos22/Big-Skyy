@@ -2,12 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://onojadavid.vercel.app/</loc>
+    <loc>https://onojadavid.me/</loc>
     <lastmod>2026-08-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://onojadavid.vercel.app/icon-512.png</image:loc>
+      <image:loc>https://onojadavid.me/icon-512.png</image:loc>
       <image:title>Big Skyy Marketing — Onoja Oche David</image:title>
       <image:caption>Logo of Big Skyy Marketing, the personal brand of Onoja Oche David, a digital marketing and real estate content specialist based in Abuja, Nigeria.</image:caption>
     </image:image>
